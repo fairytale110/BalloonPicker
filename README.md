@@ -12,6 +12,8 @@
  
 
 
+[Download Demo apk](https://github.com/fairytale110/balloonPicker/raw/master/app/release/app-release.apk)
+
 ## 控件拆分：
 
 元素 | 拆分 |  效果  
