@@ -301,9 +301,11 @@ Then, Drop it to XML layout or new it
  />
 ```
 
+Finally, custom it's style as you want
+
+
 ```kotlin
 
-Finally, custom it's style as you want
 
 fun load(){
      balloon_picker.layerValues(10, 50, 5)
