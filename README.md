@@ -1,4 +1,4 @@
-# balloonPicker
+# BalloonPicker
 
 
 
@@ -275,6 +275,24 @@ override fun layerTouchedUp() {
 ## 开始使用
 修饰一下，抛出必要的样式设置方法，最终效果完成：
 //使用方法
+
+Add it in your root build.gradle at the end of repositories:
+
+	allprojects {
+		repositories {
+			...
+			maven { url 'https://jitpack.io' }
+		}
+	}
+Step 2. Add the dependency
+
+	dependencies {
+	        implementation 'com.github.fairytale110:BalloonPicker:1.0.1'
+	
+
+
+Then, Drop it to XML layout or new it
+
 ```xml
 <tech.nicesky.balloonpicker.BalloonPickerView
         android:id="@+id/balloon_picker"
@@ -284,6 +302,8 @@ override fun layerTouchedUp() {
 ```
 
 ```kotlin
+
+Finally, custom it's style as you want
 
 fun load(){
      balloon_picker.layerValues(10, 50, 5)
@@ -306,3 +326,7 @@ fun load(){
 ```
 
 > 当然，这个控件还有很大的优化空间，欢迎诸位一起探讨。
+
+## THANKS
+
+[Dribbble](https://dribbble.com/shots/6549207-Balloon-Slider-Control)
