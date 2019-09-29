@@ -12,7 +12,7 @@
  
 
 
-[Download Demo apk](https://github.com/fairytale110/balloonPicker/raw/master/app/release/app-release.apk)
+[Download demo apk](https://github.com/fairytale110/balloonPicker/raw/master/app/release/app-release.apk)
 
 ## 控件拆分：
 
