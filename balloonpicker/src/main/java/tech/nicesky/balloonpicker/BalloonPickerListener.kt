@@ -1,4 +1,4 @@
-package tech.nicesky.balloonpickerdemo
+package tech.nicesky.balloonpicker
 
 interface BalloonPickerListener {
    fun changed(value : Long)

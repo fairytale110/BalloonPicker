@@ -24,25 +24,18 @@ class TrackLayerView : View {
     private var paintOfTrackLayerUnSelected= Paint()
     private var paintOfThumb = Paint()
     private var paintOfThumbStroke = Paint()
-
-    /**当前位置*/
     private var pointOfThumb = PointF(-1F,-1F)
-    /**出师位置*/
     private var pointOfThumbDefault = PointF(-1F, -1F)
     private var pointOfThumbTemp = PointF(0F,0F)
-
     private var pointOfTouchDown= PointF(0F,0F)
-
     private var thumbOuterCircleRadiusMax : Float = DpUtil.dp2px(25.toFloat())
     private var thumbOuterCircleRadiusDefault : Float =  DpUtil.dp2px(15.toFloat())
     private var thumbOuterCircleRadius : Float = thumbOuterCircleRadiusDefault
     private var thumbOuterCircleRadiusTemp : Float = thumbOuterCircleRadius
-
     private var thumbInnerCircleRadiusDefault : Float = DpUtil.dp2px(7.5.toFloat())
     private var thumbInnerCircleRadiusMax : Float = thumbOuterCircleRadiusMax - DpUtil.dp2px(0.8F)
     private var thumbInnerCircleRadius : Float = thumbInnerCircleRadiusDefault
     private var thumbInnerCircleRadiusTemp : Float = thumbInnerCircleRadius
-
     private var yOfTrackLayer : Float = 0F
     private var padding : Float = DpUtil.dp2px(5F)
     private var widthOfView : Float =  DpUtil.dp2px(10F)
@@ -51,18 +44,18 @@ class TrackLayerView : View {
     private var xOfTrackLayerEnd = 0F
     private var xOfValue = 0F
     private var yOfValue = 0F
-
     private var anim : ValueAnimator = ValueAnimator.ofInt(0,1)
-
-    private val duration = 200L
+    private val duration = 300L
     internal var increase : Boolean = false
     private var touchWithinRange : Boolean = false
+
     internal var colorOFThumb = "#FFFFFF".toColorInt()
         set(value) {
             field = value
             paintOfThumb.color = colorOFThumb
             postInvalidate()
         }
+
     internal var colorOFThumbStroke = "#512DA8".toColorInt()
         set(value) {
             field = value
@@ -159,17 +152,14 @@ class TrackLayerView : View {
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec)
-        Log.w(TAG, "onMeasure")
     }
 
     override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
         super.onSizeChanged(w, h, oldw, oldh)
-       // Log.w(TAG, "onSizeChanged")
     }
 
     override fun onLayout(changed: Boolean, left: Int, top: Int, right: Int, bottom: Int) {
         super.onLayout(changed, left, top, right, bottom)
-         Log.w(TAG, "onLayout")
         widthOfView = width.toFloat()
         heightOfView = height.toFloat()
 
@@ -181,7 +171,6 @@ class TrackLayerView : View {
         pointOfThumbDefault.set(if (xNew < (xOfTrackLayerStart)) xOfTrackLayerStart else xNew, yOfTrackLayer)
         pointOfThumb = pointOfThumbDefault
         pointOfThumbTemp = pointOfThumb
-
     }
 
     override fun onFinishInflate() {
@@ -190,7 +179,6 @@ class TrackLayerView : View {
 
     override fun onDraw(canvas: Canvas?) {
         super.onDraw(canvas)
-
         canvas?.drawLine(xOfTrackLayerStart, yOfTrackLayer ,pointOfThumb.x,  yOfTrackLayer, paintOfTrackLayerSelected)
         canvas?.drawLine(pointOfThumb.x, yOfTrackLayer ,xOfTrackLayerEnd,  yOfTrackLayer, paintOfTrackLayerUnSelected)
         canvas?.drawCircle(pointOfThumb.x, pointOfThumb.y, thumbOuterCircleRadius,  paintOfThumbStroke)
@@ -203,7 +191,6 @@ class TrackLayerView : View {
                 if (event.x < pointOfThumb.x + DpUtil.dp2px(50F) && event.x > pointOfThumb.x - DpUtil.dp2px(50F)
                     && event.y < pointOfThumb.y + DpUtil.dp2px(50F) && event.y > pointOfThumb.y - DpUtil.dp2px(50F)
                 ){
-                  //  Log.w(TAG, "in side")
                     //动画变大内圆paintOfThumb 的 radius半径
                     touchWithinRange = true
                     pointOfTouchDown = PointF(event.x, event.y)
@@ -216,9 +203,6 @@ class TrackLayerView : View {
                 true
             }
             MotionEvent.ACTION_UP ->{
-                //Log.d("onTouchEvent", "UP")
-                    //动画变大内圆paintOfThumb 的 radius半径
-
                 xOfValue = xOfTrackLayerEnd - selectedValue.toString().length.toFloat() * paintOfValueSelected.textSize
                 yOfValue = yOfTrackLayer - thumbOuterCircleRadiusMax - padding
                 scalingInnerCircleRadius(false)
@@ -228,8 +212,6 @@ class TrackLayerView : View {
                 true
             }
             MotionEvent.ACTION_MOVE->{
-                //Log.d("onTouchEvent", "MOVE")
-
                 //TODO  Refining logic
                 if (touchWithinRange){
                     val x = pointOfThumbTemp.x + event.x - pointOfTouchDown.x
@@ -255,7 +237,6 @@ class TrackLayerView : View {
                 this.increase -> (duration* (thumbInnerCircleRadiusMax - thumbInnerCircleRadiusTemp)/(thumbInnerCircleRadiusMax - thumbInnerCircleRadiusDefault)).toLong()
                 else -> (duration* (thumbInnerCircleRadiusTemp - thumbInnerCircleRadiusDefault)/(thumbInnerCircleRadiusMax - thumbInnerCircleRadiusDefault)).toLong()
             }
-            //Log.w(TAG, "Last time is $remainingTime")
             anim.duration = if (remainingTime < 0) 5 else remainingTime
         }
         anim.duration = duration
@@ -276,7 +257,6 @@ class TrackLayerView : View {
         this.minValue = minValue
         this.maxValue = maxValue
         this.selectedValue = defaultValue
-
         refreshView()
     }
 
@@ -309,5 +289,4 @@ class TrackLayerView : View {
     fun selectedValue(): Long{
         return selectedValue
     }
-
 }

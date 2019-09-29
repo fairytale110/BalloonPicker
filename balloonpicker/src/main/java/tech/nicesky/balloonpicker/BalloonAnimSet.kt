@@ -19,7 +19,7 @@ class BalloonAnimSet{
             val scale = if (show) loadAnimation(context, R.anim.balloon_scale_enter) else  loadAnimation(context, R.anim.balloon_scale_exit)
 
             val alpha = if (show) AlphaAnimation(0F,1F) else AlphaAnimation(0.8F,0F)
-
+            alpha.duration = 200
             animSet.addAnimation(alpha)
             animSet.addAnimation(scale)
             animSet.addAnimation(trans)

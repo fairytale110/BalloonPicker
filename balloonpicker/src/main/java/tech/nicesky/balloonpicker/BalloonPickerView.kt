@@ -16,7 +16,7 @@ import android.view.animation.Animation.AnimationListener
 import androidx.core.animation.doOnEnd
 import androidx.core.graphics.toColorInt
 import androidx.core.text.TextUtilsCompat
-import tech.nicesky.balloonpickerdemo.BalloonPickerListener
+import tech.nicesky.balloonpicker.BalloonPickerListener
 import kotlin.math.*
 import android.graphics.Typeface
 import android.icu.lang.UCharacter.GraphemeClusterBreak.T
@@ -144,11 +144,6 @@ class BalloonPickerView : ViewGroup, TrackLayerListener, ValueAnimator.AnimatorU
     }
 
     private fun initAnimation(anim: ValueAnimator){
-//        if (balloonAnim != null){
-//            if(balloonAnim.isRunning)
-//                balloonAnim.cancel()
-//            balloonAnim = null
-//        }
         balloonAnim = anim
         balloonAnim.interpolator = LinearInterpolator()
         balloonAnim.repeatCount = 0
@@ -162,8 +157,6 @@ class BalloonPickerView : ViewGroup, TrackLayerListener, ValueAnimator.AnimatorU
 
     private fun moveBalloon() {
         val b = pointThumb.x - centerOfBalloon.x
-//        if (b == 0F && balloonAnim != null && balloonAnim.isRunning)
-//            balloonAnim.cancel()
         moveBalloonWithAnim()
     }
 
@@ -187,7 +180,6 @@ class BalloonPickerView : ViewGroup, TrackLayerListener, ValueAnimator.AnimatorU
         val b = pointThumb.x - centerOfBalloon.x
         val angleRoTan = -atan(b/distanceVerticalBetweenBalloonAndTrackLayer) / PI  * 180F
         balloon?.rotation = angleRoTan.toFloat()
-
     }
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
@@ -246,18 +238,6 @@ class BalloonPickerView : ViewGroup, TrackLayerListener, ValueAnimator.AnimatorU
 
     override fun layerTouchedMoving(value: Long, pointAtLayer: PointF) {
         pointThumb.set(pointAtLayer.x, height.toFloat() - trackLayer?.getPadding()!!)
-        val b = pointThumb.x.toInt() - centerOfBalloon.x.toInt()
-//        if (abs(b) > distanceVerticalBetweenBalloonAndTrackLayer.toInt()){
-//                initAnimation(ValueAnimator.ofInt(centerOfBalloon.x.toInt(), pointThumb.x.toInt()))
-//            val valueAtBalloon =trackLayer?.minValue()!! +  (trackLayer?.maxValue()!! - trackLayer?.minValue()!!) *  centerOfBalloon.x/measuredWidth
-//            val disScaleHeight =maxScale * balloonHeightDefault * (valueAtBalloon - trackLayer?.minValue()!!) / (trackLayer?.maxValue()!! - trackLayer?.minValue()!!)
-//            val disScaleWidth = maxScale * balloonWidthDefault/2 * (valueAtBalloon - trackLayer?.minValue()!!) / (trackLayer?.maxValue()!! - trackLayer?.minValue()!!)
-//            val xOfBalloon = (centerOfBalloon.x - balloonWidthDefault / 2 - disScaleWidth.toInt() + if (b > 0)  b-distanceVerticalBetweenBalloonAndTrackLayer else b + distanceVerticalBetweenBalloonAndTrackLayer).toInt()
-//
-//            balloon?.layout( xOfBalloon  , balloonDefaultY.toInt() - disScaleHeight.toInt(), xOfBalloon + balloonWidthDefault.toInt() + disScaleWidth.toInt() * 2, (balloonDefaultY + balloonHeightDefault).toInt())
-//            centerOfBalloon.set(xOfBalloon + disScaleWidth + balloonWidthDefault / 2F,  balloonDefaultY + balloonHeightDefault/2 - disScaleHeight/2 )
-//            rotateBalloon()
-//        }
         moveBalloon()
         balloon?.valueOfBalloon = value
     }

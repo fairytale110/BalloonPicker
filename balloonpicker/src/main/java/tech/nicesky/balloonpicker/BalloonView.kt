@@ -122,5 +122,4 @@ class BalloonView : View {
         drawable?.draw(canvas)
         return bitmap
     }
-
 }
