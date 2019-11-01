@@ -12,8 +12,6 @@ A slimy Android balloon seek bar library in Kotlin,
  
 
 ## 开始使用
-修饰一下，抛出必要的样式设置方法，最终效果完成：
-//使用方法
 
 Add it in your root build.gradle at the end of repositories:
 
